@@ -1,0 +1,23 @@
+package Test1;
+
+import modele.Produit;
+import dao.GerantDeProduitImpl;
+import dao.GerantDeProduit;
+
+public class MainBis {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		GerantDeProduit gerant = new GerantDeProduitImpl();
+		for (Produit objet : gerant.lireTous())
+			System.out.println(objet);
+		
+		System.out.println(gerant.lireUn("MOT127"));
+
+	}
+
+}
+

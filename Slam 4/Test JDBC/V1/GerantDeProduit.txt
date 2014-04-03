@@ -1,0 +1,47 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import modele.Produit;
+
+public class GerantDeProduit {
+
+	private Connection connexion = null;
+
+	public List<Produit> lireTous() {
+
+		List<Produit> retour = new ArrayList<>();
+
+		try {
+			connexion = DriverManager.getConnection(
+					"jdbc:derby:/home/crif/Téléchargement./motoDB;create=true",
+					"derby", "derby");
+			Statement ordreSQL = connexion.createStatement();
+			ResultSet resultat = ordreSQL
+					.executeQuery("SELECT IDPROD, CODE, DESIGNATION, PRIX FROM TABPRODUIT");
+
+			while (resultat.next())
+				retour.add(new Produit(resultat.getInt(1), resultat
+						.getString(2), resultat.getString(3), resultat
+						.getDouble(4)));
+			return retour;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return retour;
+		}
+	}
+
+}
+

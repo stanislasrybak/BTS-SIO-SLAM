@@ -1,0 +1,20 @@
+package Test1;
+
+import modele.Produit;
+import dao.GerantDeProduit;
+
+public class MainBis {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		GerantDeProduit gerant = new GerantDeProduit();
+		for (Produit objet : gerant.lireTous())
+			System.out.println(objet);
+
+	}
+
+}
+
